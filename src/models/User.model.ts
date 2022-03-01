@@ -1,10 +1,10 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 
 interface UserSchema {
   name: string,
   username: string,
   password: string,
-  cookbooks?: object[]
+  cookbooks?: [string]
 }
 
 const userSchema = new Schema({
@@ -23,7 +23,10 @@ const userSchema = new Schema({
       minlength: 8
     },
 
-    cookbooks: [{}]
+    cookbooks: {
+      type: [Types.ObjectId],
+      ref: 'Recipe'
+    }
 
 }, { timestamps: true })
 

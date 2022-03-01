@@ -1,12 +1,22 @@
+/******************************************* 
+          cookbook.com/api                  
+*******************************************/
+
 import { Request, Response, Router } from 'express'
 const router = Router()
 
-import userRoutes from './user.routes'
+
 
 router.get('/', (req: Request, res: Response) => {
-  res.json('Hitting api')
 })
 
+import axios from 'axios'
+
+
+
+
+// Routes are handled here
+import userRoutes from './api/user.routes'
 router.use("/user", userRoutes)
 
 export default router
