@@ -75,11 +75,8 @@
       "@middleware/*": [
         "src/middleware/*"
       ],
-      "@server": [
+      "@server/*": [
         "src/server/*"
-      ],
-      "@services/*": [
-        "src/services/*"
       ],
       "@routes/*": [
         "src/routes/*"

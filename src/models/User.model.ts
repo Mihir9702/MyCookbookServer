@@ -4,7 +4,7 @@ interface UserSchema {
   name: string,
   username: string,
   password: string,
-  cookbooks: object[]
+  cookbooks?: object[]
 }
 
 const userSchema = new Schema({

@@ -1,11 +1,11 @@
-import User from '@models/User.model'
+import User from '../models/User.model'
 import { Request, Response, NextFunction } from 'express'
 
 const signupHandler = async (req: Request, res: Response, next: NextFunction) => {
   
   const { name, username, password } =  req.body
 
-  const special = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
+  const special = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
 
   const user = await User.find({ username: username })
 

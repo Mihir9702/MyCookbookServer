@@ -1,6 +1,6 @@
-import { Application, Request, Response, ErrorRequestHandler } from 'express'
+import { Express, Request, Response, ErrorRequestHandler } from 'express'
 
-const error = (app: Application) => {
+const error = (app: Express) => {
   app.use((req: Request, res: Response) => {
     // this middleware runs whenever requested page is not available
     res.status(404).json({ errorMessage: "This route does not exist" });

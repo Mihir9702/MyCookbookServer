@@ -1,5 +1,8 @@
 // Main framework of Nodejs to create api
-import express, { Express, Request, NextFunction } from 'express'
+import express, { Express } from 'express'
+
+// Environment variables
+import 'dotenv/config'
 
 // Responsible for the messages you see in the terminal as requests are coming in
 import logger from 'morgan'
@@ -10,15 +13,6 @@ import cookieParser from 'cookie-parser'
 // Needed to accept from requests from 'the outside'. CORS stands for cross origin resource sharing
 // unless the request if from the same domain, by default express wont accept POST requests
 import cors from 'cors'
-
-// Session middleware for authentication
-import session from 'express-session'
-
-// MongoStore in order to save the user session in the database
-import MongoStore from 'connect-mongo'
-
-// Connects the mongo uri to maintain the same naming structure
-import MONGO_URI from '@server/consts'
 
 // Middleware configuration
 const app = (app: Express) => {
@@ -42,27 +36,6 @@ const app = (app: Express) => {
   app.use(express.urlencoded({ extended: false }))
   app.use(cookieParser())
 
-  // Middleware that adds a "req.session" information and later to check that you are who you say you are 😅
-  app.use(
-    session({
-      secret: process.env.SESSION_SECRET || "super hyper secret key",
-      resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create({
-        mongoUrl: MONGO_URI,
-      }),
-      cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 365,
-        sameSite: "none",
-        secure: process.env.NODE_ENV === "production",
-      },
-    })
-  )
-
-  app.use((req: Request, res, next: NextFunction) => {
-    req.user = req.session.user
-    next()
-  })
 }
 
 export default app

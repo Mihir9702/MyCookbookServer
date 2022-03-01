@@ -1,41 +1,34 @@
 /************************************************************************************
- *                              Set basic express settings                          *
+ *                               Express Server App                                 *
  ***********************************************************************************/
 
-import express, { Express } from 'express';
-import Mongoose from '@server/index'
+import 'dotenv/config'
 
+import express, { Express } from 'express'
 const app: Express = express();
 
-import 'dotenv/config'
-import cookieParser from 'cookie-parser';
-import morgan from 'morgan';
+import server from './config/index'
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(cookieParser());
+import Mongoose from './server/index'
+
+import error from './error-handling'
+
+import morgan from 'morgan'
+
 
 // Show routes called in console during development
 if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
+    app.use(morgan('dev'))
 }
 
-/************************************************************************************
- *                                      Routes                                      *
- ***********************************************************************************/
+// All routes are pathed from /api
+import indexRouter from './routes/index.routes'
+app.use('/', indexRouter)
 
-import apiRouter from '@routes/api.routes';
-app.use('/api', apiRouter);
-
-/************************************************************************************
- *                                       Port                                       *
- ***********************************************************************************/
-
-const PORT = process.env.PORT
-
-app.listen(PORT, () => {
-  console.log(`You are now connected to http://localhost:${PORT}`)
+app.listen(process.env.PORT, () => {
+  console.log(`You are now connected to http://localhost:${process.env.PORT}`)
   Mongoose()
+  server(app)
+  error(app)
 })
-
-export default app;
+export default app
