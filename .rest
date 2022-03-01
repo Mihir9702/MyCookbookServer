@@ -1,0 +1,33 @@
+GET http://localhost:5005/user
+
+###
+
+GET http://localhost:5005/user/create
+
+### Mihir9702
+
+GET http://localhost:5005/user/621e213d62ce80af9282fda5
+
+### Mihir97
+
+GET http://localhost:5005/user/621e232b85bb665bce741cf9
+
+###
+
+POST http://localhost:5005/user/create HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Mihir Patel",
+  "username": "Mihir97",
+  "password": "RihimLetap"
+}
+
+POST http://localhost:5005/user/create HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Mihir",
+  "username": "Mihir",
+  "password": "Patel"
+}
