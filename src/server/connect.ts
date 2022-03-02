@@ -1,8 +1,6 @@
 import { Express } from 'express'
 import Mongoose from '../server/index'
-
 import config from '../config/index'
-
 import error from '../error-handling'
 
 const connect = (app: Express) => {

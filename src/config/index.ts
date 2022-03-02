@@ -14,16 +14,20 @@ import cors from 'cors'
 // Middleware configuration
 const app = (app: Express) => {
 
-  // Server on cloud uses a proxy
   app.set("trust proxy", 1)
 
-  // controls a very specific header to pass headers from the frontend
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: false }))
+
   app.use(
     cors({
       credentials: true,
       origin: process.env.ORIGIN,
     })
   )
+
+  app.use(logger('dev'))
+  app.use(cookieParser())
 
 }
 

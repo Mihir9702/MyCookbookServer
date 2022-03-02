@@ -1,12 +1,9 @@
-GET http://localhost:5001
+GET http://localhost:5001/api
 
-###
-
-GET http://localhost:5001/api/user
 
 ### Dynamic User
 
-GET http://localhost:5001/api/user/Mihir9702
+GET http://localhost:5001/api/user/DynamicUser1
 
 ### Login
 
@@ -24,14 +21,23 @@ GET http://localhost:5001/api/user/jwt
 
 ### Signup
 
-POST http://localhost:5001/api/user/signup HTTP/1.1
+POST http://localhost:5001/api/user/signup
+Content-Type: application/json
 
 {
-  "name": "sueprsajkdjwa",
-  "username": "akldawjdl",
-  "password": "jaiodjwadjwajdkawjd"
+  "name": "Mihir9702",
+  "username": "Mihir9702",
+  "password": "Mihir9702"
 }
 
-###
+### All Categories
 
-GET https://api.spoonacular.com/recipes/complexSearch
+GET http://localhost:5001/api/categories
+
+### Individual Category
+
+GET http://localhost:5001/api/categories/Seafood
+
+### Individual Recipe
+
+GET http://localhost:5001/api/categories/Breakfast/52965

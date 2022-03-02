@@ -2,17 +2,28 @@ import { Schema, model, Types } from 'mongoose'
 
 interface CategorySchema {
   title: string,
-  recipes: [string]
+  image: string,
+  description: string,
+  recipes: [{
+    strMeal: string,
+    strMealThumb: string,
+    idMeal: string
+  }]
 }
 
 const categorySchema = new Schema({
 
   title: String,
 
+  image: String,
+
+  description: String,
+
   recipes: {
-    type: [Types.ObjectId],
-    ref: 'Recipe'
+    type: [{}],
+    unique: true
   }
+
 
 })
 

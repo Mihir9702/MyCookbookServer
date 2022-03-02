@@ -1,15 +1,22 @@
 import { Schema, model } from 'mongoose'
 
 interface RecipeSchema {
+  id: string,
   title: string,
   category: string,
   image: string,
   video: string,
   instructions: [string],
-  ingredients: [string]
+  ingredients: [[string]]
 }
 
 const recipeSchema = new Schema({
+
+  id: {
+    type: String,
+    required: true,
+    unique: true
+  },
 
   title: {
     type: String,
@@ -25,7 +32,7 @@ const recipeSchema = new Schema({
 
   instructions: [String],
 
-  ingredients: [String],
+  ingredients: [[String]],
 
 })
 
