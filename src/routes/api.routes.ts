@@ -1,15 +1,20 @@
+import { Router } from 'express'
+const router = Router()
+// import auth from '../middleware/jwt.middleware'
+
+
 /******************************************* 
             cookbook.com/api                  
 *******************************************/
-import { Request, Response, Router } from 'express'
-const router = Router()
 
 // Api Routes are handled here
-
-import recipeRoutes from './recipe.routes'
-router.use('/', recipeRoutes)
+import categoryRoutes from './category.routes'
+router.use('/', categoryRoutes)
 
 import userRoutes from './user.routes'
 router.use('/user', userRoutes)
+
+import cookbookRoutes from './cookbook.routes'
+router.use('/cookbook', cookbookRoutes)
 
 export default router

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Category from '../models/Catagory.model'
+import Category from '../models/Category.model'
 import Recipe from '../models/Recipe.model';
 
 Category
@@ -10,23 +10,15 @@ Category
       axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${re.idMeal}`)
       .then(response => {
         response.data.meals.map(recipeInfo => {
-
           const instructions = recipeInfo.strInstructions.replace(/\r?\n|\r/g, " ")
-
-          Recipe.create({
-            title: recipeInfo.strMeal,
-            category: recipeInfo.strCategory,
-            image: recipeInfo.strMealThumb,
-            ingredients: [recipeInfo.strMeasure1, recipeInfo.strIngredient1],
-            instructions: instructions
-          })
-          .then(recipe => {
-            console.log(recipe)
-          })
-          .catch(() => console.log('Recipe Creation error'))
-
+          const { strMeal, strCategory, strMealThumb } = recipeInfo
+          const { strMeasure, strIngredient } = recipeInfo
+          const recipe = { title: strMeal, category: strCategory, image: strMealThumb, ingredients: [strMeasure, strIngredient], instructions: instructions }
+          Recipe.create(recipe)
+          .then(recipe => recipe)
+          .catch(() => 'Recipe Creation error')
         })
       })
     })
   })
-}).catch(e => console.log( { message: 'er' } ))
+}).catch(e => `err${e}`) 

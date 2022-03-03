@@ -1,13 +1,12 @@
 import { Schema, model } from 'mongoose'
-
 interface RecipeSchema {
-  id: string,
-  title: string,
-  category: string,
-  image: string,
-  video: string,
-  instructions: [string],
-  ingredients: [[string]]
+  id: string
+  title: string
+  category: string
+  image: string
+  video: string
+  instructions: string[]
+  ingredients: [string, string][]
 }
 
 const recipeSchema = new Schema({
@@ -17,7 +16,6 @@ const recipeSchema = new Schema({
     required: true,
     unique: true
   },
-
   title: {
     type: String,
     required: true,
@@ -25,15 +23,10 @@ const recipeSchema = new Schema({
   },
 
   category: String,
-
   image: String,
-
   video: String,
-
   instructions: [String],
-
   ingredients: [[String]],
-
 })
 
 const Recipe = model<RecipeSchema>('Recipe', recipeSchema)

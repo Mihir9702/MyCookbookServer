@@ -1,43 +1,61 @@
-GET http://localhost:5001/api
+GET http://localhost:5002/api
 
 
 ### Dynamic User
 
-GET http://localhost:5001/api/user/DynamicUser1
+GET http://localhost:5002/api/user/DynamicUser1
 
 ### Login
 
-POST http://localhost:5001/api/user/login
+POST http://localhost:5002/api/user/login
 Content-Type: application/json
 
 {
-  "username": "Mihir9702",
-  "password": "RihimLetap"
+  "username": "authuser",
+  "password": "authpass"
 }
 
 ### Auth
 
-GET http://localhost:5001/api/user/jwt
+GET http://localhost:5002/api/user/jwt
 
 ### Signup
 
-POST http://localhost:5001/api/user/signup
+POST http://localhost:5002/api/user/signup
 Content-Type: application/json
 
 {
-  "name": "Mihir9702",
-  "username": "Mihir9702",
-  "password": "Mihir9702"
+  "name": "auth",
+  "username": "authesds",
+  "password": "authpass"
 }
+
 
 ### All Categories
 
-GET http://localhost:5001/api/categories
+GET http://localhost:5002/api/categories
 
 ### Individual Category
 
-GET http://localhost:5001/api/categories/Seafood
+GET http://localhost:5002/api/categories/Chicken
 
 ### Individual Recipe
 
-GET http://localhost:5001/api/categories/Breakfast/52965
+GET http://localhost:5002/api/recipes/52965
+
+### Cookbook
+
+POST http://localhost:5002/api/cookbook
+Content-Type: application/json
+
+{
+
+  "owner": "62213d372cf340850e1c99b2",
+  "recipes": [
+    "621fc3d8d3ba309c7f6956cf", "621fc3d9d3ba309c7f695707",
+    "621fc3d9d3ba309c7f695745", "621fc3d9d3ba309c7f695747",
+    "621fc3dad3ba309c7f695765", "621fc3dad3ba309c7f695769"
+  ]
+}
+
+###

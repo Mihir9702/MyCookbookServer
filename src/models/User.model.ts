@@ -1,31 +1,28 @@
 import { Schema, model, Types } from 'mongoose'
 
 interface UserSchema {
-  name: string,
-  username: string,
-  password: string,
-  cookbooks?: [string]
+  name?: string
+  username: string
+  password: string
+  cookbooks?: Types.ObjectId[]
 }
 
 const userSchema = new Schema({
 
     name : String,
-
     username: {
       type: String,
       unique: true,
       required: true
     },
-
     password: {
       type: String,
       required: true,
       minlength: 8
     },
-
     cookbooks: {
       type: [Types.ObjectId],
-      ref: 'Recipe'
+      ref: 'Cookbook'
     }
 
 }, { timestamps: true })

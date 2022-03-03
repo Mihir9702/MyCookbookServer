@@ -1,5 +1,6 @@
 import { Request } from 'express'
 
+
 const tokenFromHeaders = (req: Request) => {
 
   // Check if the token is available on the request Headers
@@ -9,7 +10,6 @@ const tokenFromHeaders = (req: Request) => {
   }
 
   return null
-
 }
 
 export default tokenFromHeaders

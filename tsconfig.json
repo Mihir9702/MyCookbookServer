@@ -65,23 +65,6 @@
     /* Advanced Options */
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true,  /* Disallow inconsistently-cased references to the same file. */
-    "paths": {
-      "@config/*": [
-        "src/config/*"
-      ],
-      "@models/*": [
-        "src/models/*"
-      ],
-      "@middleware/*": [
-        "src/middleware/*"
-      ],
-      "@server/*": [
-        "src/server/*"
-      ],
-      "@routes/*": [
-        "src/routes/*"
-      ]
-    },
     "useUnknownInCatchVariables": false
   },
   "include": [

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Category from '../models/Catagory.model';
+import Category from '../models/Category.model';
 
 axios
 .get('https://www.themealdb.com/api/json/v1/1/categories.php')
@@ -11,12 +11,12 @@ axios
       image: individualFoodCategories.strCategoryThumb,
       description: individualFoodCategories.strCategoryDescription
       })
-    .then(newCreatedCategory => console.log(newCreatedCategory))
-    .catch(e => console.log({ message: 'Category Creation Error', error: e }))
+    .then(newCreatedCategory => newCreatedCategory)
+    .catch(e => ({ message: 'Category Creation Error', error: e }))
 
   })
 })
-.catch(e => console.log({ message: 'Axios Request Error', error: e }))
+.catch(e => ({ message: 'Axios Request Error', error: e }))
 
 const categories = [
   'Beef',
@@ -41,8 +41,8 @@ categories.map(c => {
   .then(response => {
     response.data.meals.map(meal => {
       Category.findOneAndUpdate({ title: c }, { $push: { recipes: meal }})
-      .then(ar => console.log(ar))
-      .catch(er => console.log(er))
+      .then(ar => ar)
+      .catch(er => er)
     })
   })
 })
