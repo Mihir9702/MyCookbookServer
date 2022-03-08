@@ -13,7 +13,7 @@ import signupHandler from '../middleware/signupHandler'
 import auth from '../middleware/jwt.middleware'
 
 // Encryption
-import { genSaltSync, compareSync, hashSync } from 'bcrypt'
+import { genSaltSync, compareSync, hashSync } from 'bcryptjs'
 
 // JWT
 import jwt from 'jsonwebtoken'
