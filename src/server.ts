@@ -1,6 +1,7 @@
+import 'dotenv/config'
 import app from './app'
 import connect from './server/connect'
 
-app.listen(5002, () => connect(app))
+app.listen(process.env.PORT, () => connect(app))
 
 export default app
