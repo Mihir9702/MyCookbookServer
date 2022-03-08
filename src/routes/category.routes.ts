@@ -33,6 +33,7 @@ router.get('/categories/:category', (req: Request, res: Response) => {
 // All Recipes
 router.get('/recipes', (req: Request, res: Response) => {
   Recipe.find()
+    .select('_id title image')
     .then(r => res.status(200).json(r))
     .catch(() =>
       res.status(500).json({ errorMessage: `Unable to query recipes` })
@@ -40,8 +41,8 @@ router.get('/recipes', (req: Request, res: Response) => {
 })
 
 // Specific Recipe
-router.get('/recipes/:id', (req: Request, res: Response) => {
-  Recipe.findOne({ id: req.params.id })
+router.get('/recipes/:recipe', (req: Request, res: Response) => {
+  Recipe.findOne({ title: req.params.recipe })
     .then(r => res.status(200).json(r))
     .catch(() =>
       res
