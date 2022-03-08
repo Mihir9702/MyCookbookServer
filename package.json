@@ -6,10 +6,6 @@
     "dev": "nodemon",
     "build": "npx tsc"
   },
-  "engines": {
-    "node": "16.13.2",
-    "npm": "8.1.2"
-  },
   "dependencies": {
     "axios": "^0.26.0",
     "bcryptjs": "^2.4.3",
@@ -45,5 +41,10 @@
     "ts-node": "^10.5.0",
     "tsconfig-paths": "^3.12.0",
     "typescript": "^4.5.5"
-  }
+  },
+  "engines": {
+    "node": "16.13.2",
+    "npm": "8.1.2"
+  },
+  "type": "module"
 }
