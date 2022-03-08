@@ -9,46 +9,49 @@ import Category from '../models/Category.model'
  ***********************************************/
 
 // All Categories
-router.get('/categories', (req: Request, res: Response) => {
-  Category.find()
-    .sort('title')
-    .select('title image description')
-    .then(r => res.status(200).json(r))
-    .catch(() =>
-      res.status(500).json({ errorMessage: 'Unable to query categories' })
-    )
+router.get('/categories', async (req: Request, res: Response) => {
+  try {
+    const r = await Category.find()
+      .sort('title')
+      .select('title image description')
+    res.status(200).json(r)
+  } catch {
+    res.status(500).json({ errorMessage: 'Unable to query categories' })
+  }
 })
 
 // Specific Category
-router.get('/categories/:category', (req: Request, res: Response) => {
-  Category.findOne({ title: req.params.category })
-    .then(c => res.status(200).json(c))
-    .catch(() =>
-      res
-        .status(500)
-        .json({ errorMessage: `Unable to query ${req.params.category}` })
-    )
+router.get('/categories/:category', async (req: Request, res: Response) => {
+  try {
+    const r = await Category.findOne({ title: req.params.category })
+    res.status(200).json(r)
+  } catch {
+    res
+      .status(500)
+      .json({ errorMessage: `Unable to query ${req.params.category}` })
+  }
 })
 
 // All Recipes
-router.get('/recipes', (req: Request, res: Response) => {
-  Recipe.find()
-    .select('_id title image')
-    .then(r => res.status(200).json(r))
-    .catch(() =>
-      res.status(500).json({ errorMessage: `Unable to query recipes` })
-    )
+router.get('/recipes', async (req: Request, res: Response) => {
+  try {
+    const r = await Recipe.find().select('_id title image')
+    res.status(200).json(r)
+  } catch {
+    res.status(500).json({ errorMessage: `Unable to query recipes` })
+  }
 })
 
 // Specific Recipe
-router.get('/recipes/:recipe', (req: Request, res: Response) => {
-  Recipe.findOne({ title: req.params.recipe })
-    .then(r => res.status(200).json(r))
-    .catch(() =>
-      res
-        .status(500)
-        .json({ errorMessage: `Unable to query recipe#${req.params.recipeID}` })
-    )
+router.get('/recipes/:recipe', async (req: Request, res: Response) => {
+  try {
+    const r = await Recipe.findOne({ title: req.params.recipe })
+    res.status(200).json(r)
+  } catch {
+    res
+      .status(500)
+      .json({ errorMessage: `Unable to query recipe#${req.params.recipeID}` })
+  }
 })
 
 export default router
