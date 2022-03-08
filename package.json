@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start": "npx tsc",
-    "build": "node dist/src/index.js"
+    "build": "node ./dist/src/index.js"
   },
   "dependencies": {
     "axios": "^0.26.0",
