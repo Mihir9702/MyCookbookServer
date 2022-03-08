@@ -1,7 +1,6 @@
-import { PORT } from './server/consts'
 import app from './app'
 import connect from './server/connect'
 
-app.listen(PORT, () => connect(app))
+app.listen(5002, () => connect(app))
 
 export default app
