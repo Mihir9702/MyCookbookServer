@@ -2,8 +2,12 @@
   "name": "my-cookbook-server",
   "version": "0.1.0",
   "scripts": {
-    "start": "npx tsc",
-    "build": "node ./dist/src/index.js"
+    "build-ts": "tsc",
+    "postinstall": "npm run build-ts",
+    "start": "npm run serve",
+    "serve": "node dist/server.js",
+    "watch-node": "nodemon dist/server.js",
+    "watch-ts": "tsc -w"
   },
   "dependencies": {
     "axios": "^0.26.0",
@@ -15,15 +19,16 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",
-    "logger": "^0.0.1",
     "express-jwt": "^6.1.1",
     "jsonwebtoken": "^8.5.1",
+    "logger": "^0.0.1",
     "mongoose": "^6.2.3",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "serve": "^13.0.2",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.12.0",
-    "typescript": "^4.5.5",
-    "nodemon": "^2.0.15"
+    "typescript": "^4.5.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
