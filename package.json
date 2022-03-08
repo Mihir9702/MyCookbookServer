@@ -2,7 +2,7 @@
   "name": "my-cookbook-server",
   "version": "0.1.0",
   "scripts": {
-    "start": "nodemon",
+    "start": "node dist/server.js",
     "dev": "nodemon",
     "build": "npx tsc"
   },
