@@ -7,13 +7,7 @@ GET http://localhost:5002/api/user/DynamicUser1
 
 ### Login
 
-POST http://localhost:5002/api/user/login
-Content-Type: application/json
-
-{
-  "username": "newuser",
-  "password": "newpass"
-}
+### eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI4Y2VjOWE0MWYxYWVkNWZjMzRhOTAiLCJuYW1lIjoibmV3bmFtZSIsInVzZXJuYW1lIjoibmV3dXNlciIsImlhdCI6MTY0Njg0MTU1MSwiZXhwIjoxNjQ2ODYzMTUxfQ.Tyclk1Ki6a0lsO4nX_cF5Al9MAPLQeHszQsg0nresvE
 
 ### Auth
 
@@ -33,7 +27,7 @@ Content-Type: application/json
 
 ### All Categories
 
-GET http://localhost:5002/api/categories
+GET http://localhost:5002/api/test
 
 ### Individual Category
 
@@ -59,3 +53,10 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:5002/api/newname/update
+Content-Type: application/json
+
+{
+  "username": "mynewusername",
+}

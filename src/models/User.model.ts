@@ -1,32 +1,33 @@
 import { Schema, model, Types } from 'mongoose'
 
 interface UserSchema {
-  name?: string
+  name: string
   username: string
   password: string
   cookbooks?: Types.ObjectId[]
 }
 
-const userSchema = new Schema({
-
-    name : String,
+const userSchema = new Schema(
+  {
+    name: String,
     username: {
       type: String,
       unique: true,
-      required: true
+      required: true,
     },
     password: {
       type: String,
       required: true,
-      minlength: 8
+      minlength: 8,
     },
     cookbooks: {
       type: [Types.ObjectId],
-      ref: 'Cookbook'
-    }
+      ref: 'Cookbook',
+    },
+  },
+  { timestamps: true }
+)
 
-}, { timestamps: true })
-
-const User = model<UserSchema>("User", userSchema);
+const User = model<UserSchema>('User', userSchema)
 
 export default User

@@ -21,9 +21,9 @@ router.get('/categories', async (req: Request, res: Response) => {
 })
 
 // Specific Category
-router.get('/categories/:category', async (req: Request, res: Response) => {
+router.get('/categories/:category', async (req, res) => {
   try {
-    const r = await Category.findOne({ title: req.params.category })
+    const r = await Recipe.find({ category: req.params.category })
     res.status(200).json(r)
   } catch {
     res
@@ -43,15 +43,14 @@ router.get('/recipes', async (req: Request, res: Response) => {
 })
 
 // Specific Recipe
-router.get('/recipes/:recipe', async (req: Request, res: Response) => {
-  try {
-    const r = await Recipe.findOne({ title: req.params.recipe })
-    res.status(200).json(r)
-  } catch {
-    res
-      .status(500)
-      .json({ errorMessage: `Unable to query recipe#${req.params.recipeID}` })
-  }
+router.get('/recipes/:recipe', (req, res) => {
+  Recipe.findOne({ title: req.params.recipe })
+    .then(r => {
+      res.status(200).json(r)
+    })
+    .catch(() =>
+      res.status(500).json({ errorMessage: `Unable to query recipe` })
+    )
 })
 
 export default router

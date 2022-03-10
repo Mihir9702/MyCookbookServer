@@ -13,8 +13,7 @@ import cors from 'cors'
 
 // Middleware configuration
 const app = (app: Express) => {
-
-  app.set("trust proxy", 1)
+  app.set('trust proxy', 1)
 
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
@@ -22,13 +21,12 @@ const app = (app: Express) => {
   app.use(
     cors({
       credentials: true,
-      origin: process.env.ORIGIN,
+      origin: process.env.ORIGIN || process.env.LOCALHOST,
     })
   )
 
   app.use(logger('dev'))
   app.use(cookieParser())
-
 }
 
 export default app
