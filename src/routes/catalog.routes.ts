@@ -5,7 +5,7 @@ import Recipe from '../models/Recipe.model'
 import Category from '../models/Category.model'
 
 /***********************************************
-             cookbook.com/api/*             
+           cookbook.com/api/catalog             
  ***********************************************/
 
 // All Categories
@@ -21,7 +21,7 @@ router.get('/categories', async (req: Request, res: Response) => {
 })
 
 // Specific Category
-router.get('/categories/:category', async (req, res) => {
+router.get('/categories/:category', async (req: Request, res: Response) => {
   try {
     const r = await Recipe.find({ category: req.params.category })
     res.status(200).json(r)

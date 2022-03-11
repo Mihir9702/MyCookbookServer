@@ -7,8 +7,8 @@ import User from '../models/User.model'
 *******************************************/
 
 // Api Routes are handled here
-import categoryRoutes from './category.routes'
-router.use('/', categoryRoutes)
+import catalogRoutes from './catalog.routes'
+router.use('/catalog', catalogRoutes)
 
 import userRoutes from './user.routes'
 router.use('/user', userRoutes)

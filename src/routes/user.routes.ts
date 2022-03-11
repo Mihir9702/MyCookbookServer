@@ -27,7 +27,21 @@ router.post('/signup', signupHandler, (req: Request, res: Response) => {
   req.body.password = hash
 
   User.create(req.body)
-    .then(u => res.json(u))
+    .then(user => {
+      const { _id, name, username } = user
+
+      // Token payload
+      const payload = { _id, name, username }
+      const TOKEN = process.env.TOKEN_SECRET
+
+      if (TOKEN) {
+        const authToken = jwt.sign(payload, TOKEN, {
+          algorithm: 'HS256',
+          expiresIn: '48h',
+        })
+        res.status(201).json({ ...payload, authToken: authToken })
+      }
+    })
     .catch(() => res.status(400).json({ errorMessage: 'User Creation Error' }))
 })
 
@@ -51,7 +65,7 @@ router.post('/login', (req: Request, res: Response) => {
         if (TOKEN) {
           const authToken = jwt.sign(payload, TOKEN, {
             algorithm: 'HS256',
-            expiresIn: '6h',
+            expiresIn: '48h',
           })
           res.status(201).json({ ...payload, authToken: authToken })
         }
