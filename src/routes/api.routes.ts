@@ -1,8 +1,5 @@
-import { Router } from 'express'
+import { Router, Request, Response } from 'express'
 const router = Router()
-// import auth from '../middleware/jwt.middleware'
-import Category from '../models/Category.model'
-import Recipe from '../models/Recipe.model'
 import User from '../models/User.model'
 
 /******************************************* 
@@ -20,7 +17,7 @@ import cookbookRoutes from './cookbook.routes'
 router.use('/cookbook', cookbookRoutes)
 
 // * Update
-router.post('/:username/update', (req, res) => {
+router.post('/:username/update', (req: Request, res: Response) => {
   User.findOneAndUpdate(
     { username: req.params.username },
     {
@@ -32,24 +29,11 @@ router.post('/:username/update', (req, res) => {
     .catch(e => res.status(500).json(e))
 })
 
-// * Delete
-router.get('/:id/delete', (req, res) => {
-  User.findByIdAndRemove(req.params.id)
-    .then(deletedUser =>
-      res
-        .status(200)
-        .json({ status: `Successfully deleted ${deletedUser.username}` })
-    )
-    .catch(() =>
-      res.status(500).json({ errorMessage: 'Unable to delete account' })
-    )
-})
-
 // * Individual User
-router.get('/:username', (req, res) => {
+router.get('/:username', (req: Request, res: Response) => {
   User.findOne({ username: req.params.username })
-    .then(u => res.json(u))
-    .catch(() => res.status(503).json({ errorMessage: 'Unable to find user' }))
+    .then(u => res.status(200).json(u))
+    .catch(e => res.status(503).json({ error: e }))
 })
 
 export default router

@@ -2,11 +2,8 @@ import 'dotenv/config'
 import { Request, Response, Router } from 'express'
 const router = Router()
 
-import { PayloadInfo } from '../interfaces/payload.interface'
-
 // Models
 import User from '../models/User.model'
-// import { UserRequest } from 'src/interfaces/user.interface'
 
 // Middleware
 import signupHandler from '../middleware/signupHandler'
@@ -22,8 +19,8 @@ import jwt from 'jsonwebtoken'
              cookbook.com/api/user             
  ***********************************************/
 
-// * Signup POST
-router.post('/signup', (req: Request, res: Response) => {
+// * Signup
+router.post('/signup', signupHandler, (req: Request, res: Response) => {
   const SALTROUNDS = 10
   const salt = genSaltSync(SALTROUNDS)
   const hash = hashSync(req.body.password, salt)
@@ -34,7 +31,7 @@ router.post('/signup', (req: Request, res: Response) => {
     .catch(() => res.status(400).json({ errorMessage: 'User Creation Error' }))
 })
 
-// * Login POST
+// * Login
 router.post('/login', (req: Request, res: Response) => {
   User.findOne({ username: req.body.username })
     .then(user => {
@@ -49,14 +46,15 @@ router.post('/login', (req: Request, res: Response) => {
 
         // Token payload
         const payload = { _id, name, username }
+        const TOKEN = process.env.TOKEN_SECRET
 
-        // Create and sign the token
-        const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
-          algorithm: 'HS256',
-          expiresIn: '6h',
-        })
-
-        res.status(201).json({ ...payload, authToken: authToken })
+        if (TOKEN) {
+          const authToken = jwt.sign(payload, TOKEN, {
+            algorithm: 'HS256',
+            expiresIn: '6h',
+          })
+          res.status(201).json({ ...payload, authToken: authToken })
+        }
       } else {
         res
           .status(401)
@@ -68,8 +66,19 @@ router.post('/login', (req: Request, res: Response) => {
     )
 })
 
-/*************************************************
-                   Dynamic Routes               
- *************************************************/
+// * Delete
+router.get('/:id/delete', auth, (req, res) => {
+  User.findByIdAndRemove(req.params.id)
+    .then(deletedUser => {
+      if (deletedUser) {
+        res
+          .status(200)
+          .json({ status: `Successfully deleted ${deletedUser.username}` })
+      }
+    })
+    .catch(() =>
+      res.status(500).json({ errorMessage: 'Unable to delete account' })
+    )
+})
 
 export default router

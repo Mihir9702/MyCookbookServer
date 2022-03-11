@@ -11,7 +11,8 @@ import cookieParser from 'cookie-parser'
 // Cross Origin Resource Sharing | Only allow server to accept form requests from the same domain
 import cors from 'cors'
 
-// Middleware configuration
+// * Middleware configuration
+// ! Error CORS
 const app = (app: Express) => {
   app.set('trust proxy', 1)
 
@@ -21,7 +22,7 @@ const app = (app: Express) => {
   app.use(
     cors({
       credentials: true,
-      origin: process.env.ORIGIN || process.env.LOCALHOST,
+      origin: process.env.ORIGIN || process.env.LOCAL,
     })
   )
 

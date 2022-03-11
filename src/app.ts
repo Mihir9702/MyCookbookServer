@@ -7,9 +7,8 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
 import Mongoose from './server/index'
-import config from './config/index'
-import error from './error-handling'
 
+// TODO: Refactor Middleware & Mongoose
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(logger('dev'))
@@ -17,7 +16,7 @@ app.use(cookieParser())
 app.use(
   cors({
     credentials: true,
-    origin: process.env.ORIGIN || process.env.LOCALHOST,
+    origin: process.env.ORIGIN || process.env.LOCAL,
   })
 )
 

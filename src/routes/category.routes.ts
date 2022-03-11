@@ -33,7 +33,7 @@ router.get('/categories/:category', async (req, res) => {
 })
 
 // All Recipes
-router.get('/recipes', async (req: Request, res: Response) => {
+router.get('/recipes', async (_, res: Response) => {
   try {
     const r = await Recipe.find().select('_id title image')
     res.status(200).json(r)
@@ -43,7 +43,7 @@ router.get('/recipes', async (req: Request, res: Response) => {
 })
 
 // Specific Recipe
-router.get('/recipes/:recipe', (req, res) => {
+router.get('/recipes/:recipe', (req: Request, res: Response) => {
   Recipe.findOne({ title: req.params.recipe })
     .then(r => {
       res.status(200).json(r)

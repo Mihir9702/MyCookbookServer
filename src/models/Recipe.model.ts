@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-interface RecipeSchema {
+export interface RecipeSchema {
   id: string
   title: string
   category: string
@@ -10,16 +10,15 @@ interface RecipeSchema {
 }
 
 const recipeSchema = new Schema({
-
   id: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   title: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
 
   category: String,
